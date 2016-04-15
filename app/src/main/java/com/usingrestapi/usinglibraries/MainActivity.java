@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -104,18 +105,25 @@ public class MainActivity extends AppCompatActivity  {
                 //String myobject =null;
               List<MyModel> ourlist =  new ArrayList<>();
 
+                Gson gson = new Gson();
                 for (int i =0; i<jsonArray.length(); i++)
                 {
-                    MyModel myModel = new MyModel();
-
                     JSONObject finalobject = jsonArray.getJSONObject(i);
-                   // myobject = finalobject.getString("country");
+                    //Using JSON here, yay!
+                    MyModel myModel = gson.fromJson(finalobject.toString(),MyModel.class);
 
-                    myModel.setCountry(finalobject.getString("country"));
+
+                    //     COMMENTING THIS TO INTEGRATE GSON LIB
+                    // MyModel myModel = new MyModel();
+                    // myobject = finalobject.getString("country");
+
+
+
+                    //   myModel.setCountry(finalobject.getString("country"));
              //       myModel.setRank(finalobject.getInt("rank"));
-                    myModel.setPopulation(finalobject.getString("population"));
+              //      myModel.setPopulation(finalobject.getString("population"));
 
-                    myModel.setFlag(finalobject.getString("flag"));
+                //    myModel.setFlag(finalobject.getString("flag"));
                     ourlist.add(myModel);
                 }
 
